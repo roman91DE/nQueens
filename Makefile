@@ -16,6 +16,3 @@ board.o: board.c board.h
 clean:
 	rm -f *.o nQueens
 
-# format:
-# 	clang-format -i *.c *.h
-

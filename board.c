@@ -38,7 +38,8 @@ int print_board(struct Board *board) {
   for (unsigned int i = 0; i < DIM; i++) {
     printf("%d|", i);
     for (unsigned int j = 0; j < DIM; j++) {
-      printf("%d ", board->grid[i][j]);
+      printf("%c ", (board->grid[i][j] ? 'Q' : '*'));
+      // (day == SUNDAY) ? 12 : 9
     }
     printf("\n");
   }
