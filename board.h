@@ -1,5 +1,7 @@
 #ifndef BOARD_DECLARATION
-#define DIM 9
+#define BOARD_DECLARATION
+
+#define DIM 8
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -12,5 +14,7 @@ struct Board {
 struct Board *make_board();
 int free_board(struct Board *board);
 int print_board(struct Board *board);
+bool is_possible(struct Board *board, unsigned int row, unsigned int col);
+int place_queen(struct Board *board, unsigned int row, unsigned int col);
 
 #endif
