@@ -1,7 +1,7 @@
 #ifndef BOARD_DECLARATION
 #define BOARD_DECLARATION
 
-#define DIM 8
+#define __GAME_DIMENSIONS__ 8
 
 #include <stdbool.h>
 #include <stdio.h>

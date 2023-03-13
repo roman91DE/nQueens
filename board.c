@@ -5,10 +5,10 @@
 
 struct Board *make_board() {
   struct Board *board = (struct Board *)malloc(sizeof(struct Board));
-  board->grid = (bool **)malloc(sizeof(bool *) * DIM);
-  for (unsigned int i = 0; i < DIM; i++) {
-    board->grid[i] = (bool *)malloc(DIM * sizeof(bool));
-    for (unsigned int j = 0; j < DIM; j++) {
+  board->grid = (bool **)malloc(sizeof(bool *) * __GAME_DIMENSIONS__);
+  for (unsigned int i = 0; i < __GAME_DIMENSIONS__; i++) {
+    board->grid[i] = (bool *)malloc(__GAME_DIMENSIONS__ * sizeof(bool));
+    for (unsigned int j = 0; j < __GAME_DIMENSIONS__; j++) {
       board->grid[i][j] = false;
     }
   }
@@ -16,7 +16,7 @@ struct Board *make_board() {
 }
 
 int free_board(struct Board *board) {
-  for (unsigned int i = 0; i < DIM; i++) {
+  for (unsigned int i = 0; i < __GAME_DIMENSIONS__; i++) {
     free(board->grid[i]);
   }
   free(board->grid);
@@ -26,18 +26,18 @@ int free_board(struct Board *board) {
 
 int print_board(struct Board *board) {
   printf("  ");
-  for (unsigned int row_header = 0; row_header < DIM - 1; row_header++) {
+  for (unsigned int row_header = 0; row_header < __GAME_DIMENSIONS__ - 1; row_header++) {
     printf("%d ", row_header);
   }
-  printf("%d\n ", DIM);
-  for (unsigned int row_header_sep = 0; row_header_sep < DIM;
+  printf("%d\n ", __GAME_DIMENSIONS__);
+  for (unsigned int row_header_sep = 0; row_header_sep < __GAME_DIMENSIONS__;
        row_header_sep++) {
     printf("--");
   }
   printf("\n");
-  for (unsigned int i = 0; i < DIM; i++) {
+  for (unsigned int i = 0; i < __GAME_DIMENSIONS__; i++) {
     printf("%d|", i);
-    for (unsigned int j = 0; j < DIM; j++) {
+    for (unsigned int j = 0; j < __GAME_DIMENSIONS__; j++) {
       printf("%c ", (board->grid[i][j] ? 'Q' : '*'));
       // (day == SUNDAY) ? 12 : 9
     }
@@ -48,7 +48,7 @@ int print_board(struct Board *board) {
 }
 
 bool is_possible(struct Board *board, unsigned int row, unsigned int col) {
-  if ((row >= DIM) || (col >= DIM)) {
+  if ((row >= __GAME_DIMENSIONS__) || (col >= __GAME_DIMENSIONS__)) {
     // Invalid row/col index
     return false;
   } else if (board->grid[row][col]) {
@@ -56,14 +56,14 @@ bool is_possible(struct Board *board, unsigned int row, unsigned int col) {
     return false;
   }
   // check vertical and horizontal collisions
-  for (unsigned int idx = 0; idx < DIM; idx++) {
+  for (unsigned int idx = 0; idx < __GAME_DIMENSIONS__; idx++) {
     if ((board->grid[row][idx]) || (board->grid[idx][col])) {
       return false;
     }
   }
   // check diagonal collisions
-  for (unsigned int row_idx = 0; row_idx < DIM; row_idx++) {
-    for (unsigned int col_idx = 0; col_idx < DIM; col_idx++) {
+  for (unsigned int row_idx = 0; row_idx < __GAME_DIMENSIONS__; row_idx++) {
+    for (unsigned int col_idx = 0; col_idx < __GAME_DIMENSIONS__; col_idx++) {
       if ((row_idx == row) && (col_idx == col)) {
         continue;
       } else if (board->grid[row_idx][col_idx]) {

@@ -8,7 +8,7 @@ int main(int argc, char **argv) {
   unsigned int queens_placed = 0;
 
   printf("Let's play a Game of n-Queens!\n");
-  while (queens_placed < DIM - 1) {
+  while (queens_placed < __GAME_DIMENSIONS__ - 1) {
     printf("Your current Board:\n");
     print_board(board);
     printf("Enter the row and column indices to place your Queen:\n");

@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -g -Wall
+CFLAGS = -g -Wall # -Ofast
 OBJS = main.o board.o
 
 all: nQueens
